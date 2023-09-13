@@ -1,20 +1,6 @@
-<?php
-$returnMessage = "";
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $message = $_POST['message'];
-
-  $arquivo = fopen("arquivo.txt", "a") or die("Não foi possível abrir o arquivo");
-  $linhaArquivo = "nome / email / mensagem \n";
-  $linhaArquivo = $name . " /// " . $email . " /// " . $message . "\n";
-
-  fwrite($arquivo, $linhaArquivo);
-  fclose($arquivo);
-
-  $returnMessage = "Mensagem enviada com sucesso!";
-}
-?>
+<!--  require  -->
+<?php require_once("functions/postToFile.php"); ?>
+<!--  require  -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- reload page  -->
+  <meta http-equiv="refresh" content="5">
 </head>
 
 <body>
@@ -34,9 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
       <label for="message">Mensagem</label>
       <textarea name="message" id="message" cols="30" rows="10" placeholder="Digite sua Mensagem" required></textarea>
-      <button type="submit">Enviar</button>
+      <button onclick="<?php $aviso = postToFile($_POST['name'], $_POST['email'], $_POST['message']); ?>" type="submit">Enviar</button>
+      <!--  call post to file and send as props whats in the html fields -->
     </form>
-    <p> <?php echo $returnMessage ?> </p>
+    <p> <?php echo $aviso ?> </p>
   </div>
 
 </body>
