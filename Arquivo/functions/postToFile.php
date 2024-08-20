@@ -48,3 +48,18 @@ function editFileContents($name, $email, $message)
   fwrite($arquivo, $linhaArquivo);
   fclose($arquivo);
 }
+
+function deleteLine($line)
+{
+  $arquivo = fopen("arquivo.txt", "r") or die("Não foi possível abrir o arquivo");
+  $linhaArquivo = fgets($arquivo);
+  $count = 0;
+  while (!feof($arquivo)) {
+    if ($count != $line) {
+      echo $linhaArquivo;
+    }
+    $linhaArquivo = fgets($arquivo);
+    $count++;
+  }
+  fclose($arquivo);
+}
