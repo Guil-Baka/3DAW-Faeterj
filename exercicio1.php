@@ -15,9 +15,19 @@ include("exercicio1Func/calculate.php");
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
   <title>Exerc1</title>
+  <style>
+    body {
+      background-color: #F5EDED;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+  </style>
 </head>
 
-<body style="background-color: #F5EDED;">
+<body>
   <form action="" class="pure-form" style="background-color: #E2DAD6;  margin: auto; margin-top: 10%; min-width: 390px; max-width: 75%; border-radius: 25px; ">
     <fieldset style="margin: auto; padding: 5%; display: flex; flex-direction: column; flex-wrap: wrap; min-width: 5%;">
       <p style="color: #6482AD; letter-spacing: -2px; font-size: 2rem; font-family: JetBrains Mono  ; ">Calculadora</p>
