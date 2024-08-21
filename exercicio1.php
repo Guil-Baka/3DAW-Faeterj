@@ -32,7 +32,7 @@ include("exercicio1Func/calculate.php");
       <input type="number" name="number2" id="number2" placeholder="Numero 2" required>
       <button class="pure-button pure-button-primary" type="submit" style="font-family: JetBrains Mono; letter-spacing: -2px; margin-top: 5%; background-color: #7FA1C3;">Calcular</button>
       <?php
-      if (!empty($_GET['number1']) && !empty($_GET['number2']) && !empty($_GET['operation'])) {
+      if (!empty($_GET['number1']) && !empty($_GET['number2'])) {
         $result = calculateTwoNumbers($_GET['number1'], $_GET['number2'], $_GET['operation']);
       } else {
         // echo "<p style: color: black;>Preecha os campos.</p>";
@@ -41,7 +41,7 @@ include("exercicio1Func/calculate.php");
       <p style="margin-top: 5%; font-family: JetBrains Mono; letter-spacing: -2px; color: #6482AD;">Resultado: <?php echo $result; ?></p>
       <!-- print on console -->
       <?php
-      if (!empty($_GET['number1']) && !empty($_GET['number2']) && !empty($_GET['operation'])) {
+      if (!empty($_GET['number1']) && !empty($_GET['number2'])) {
         $result = calculateTwoNumbers($_GET['number1'], $_GET['number2'], $_GET['operation']);
         echo "<script>console.log('Resultado: $result');</script>";
       } else {
