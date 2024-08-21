@@ -18,18 +18,17 @@ include("exercicio1Func/calculate.php");
 </head>
 
 <body style="background-color: #F5EDED;">
-  <form action="" class="pure-form" style="background-color: #E2DAD6;  margin: auto; margin-top: 10%; max-width: 75%; border-radius: 25px; ">
-
-    <fieldset style="margin: auto; padding: 20%; display: flex; flex-direction: column; flex-wrap: wrap;">
+  <form action="" class="pure-form" style="background-color: #E2DAD6;  margin: auto; margin-top: 10%; min-width: 390px; max-width: 75%; border-radius: 25px; ">
+    <fieldset style="margin: auto; padding: 5%; display: flex; flex-direction: column; flex-wrap: wrap; min-width: 5%;">
       <p style="color: #6482AD; letter-spacing: -2px; font-size: 2rem; font-family: JetBrains Mono  ; ">Calculadora</p>
-      <input type="number" name="number1" id="number1" placeholder="Numero 1" required>
+      <input style="font-family: JetBrains Mono; min-width: 0px;" type="number" name="number1" id="number1" placeholder="Numero 1" required>
       <select style="margin-bottom: 2%; margin-top: 2%;" name="operation" id="operation">
         <option value="add">Soma</option>
         <option value="subtract">Subtrair</option>
         <option value="multiply">Multiplicar</option>
         <option value="divide">Dividir</option>
       </select>
-      <input type="number" name="number2" id="number2" placeholder="Numero 2" required>
+      <input style="font-family: JetBrains Mono; min-width: none;" type="number" name="number2" id="number2" placeholder="Numero 2" required>
       <button class="pure-button pure-button-primary" type="submit" style="font-family: JetBrains Mono; letter-spacing: -2px; margin-top: 5%; background-color: #7FA1C3;">Calcular</button>
       <?php
       if (!empty($_GET['number1']) && !empty($_GET['number2'])) {
