@@ -13,7 +13,13 @@ function calculateTwoNumbers($number1, $number2, $operation)
   } elseif ($operation == "multiply") {
     $result = $N1 * $N2;
   } elseif ($operation == "divide") {
-    $result = $N1 / $N2;
+    // catch division by zero error using try-catch
+    try {
+      $result = $N1 / $N2;
+    } catch (Exception $e) {
+      echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
+    // $result = $N1 / $N2;
   }
 
   return $result;
