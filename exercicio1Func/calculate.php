@@ -1,5 +1,5 @@
 <?php
-function calculateTwoNumbers($number1, $number2, $operation)
+function calculateTwoNumbers($operation)
 {
   $result = 0;
   $N1 = $_GET['number1'];
@@ -13,14 +13,17 @@ function calculateTwoNumbers($number1, $number2, $operation)
   } elseif ($operation == "multiply") {
     $result = $N1 * $N2;
   } elseif ($operation == "divide") {
-    // catch division by zero error using try-catch
-    try {
-      $result = $N1 / $N2;
-    } catch (Exception $e) {
-      echo 'Caught exception: ',  $e->getMessage(), "\n";
-    }
-    // $result = $N1 / $N2;
+    $result = divisao($N1, $N2);
   }
 
   return $result;
+}
+
+function divisao($N1, $N2)
+{
+  if ($N2 == 0) {
+    return "Não é possível dividir por 0";
+  } else {
+    return $N1 / $N2;
+  }
 }
