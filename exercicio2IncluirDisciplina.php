@@ -1,3 +1,7 @@
+<?php
+require_once 'funcExercicio2/IncluirDisciplina.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +19,7 @@
     body {
       background-color: #F5EDED;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -24,7 +29,7 @@
 </head>
 
 <body>
-  <form class="pure-form" action="exercicio2Sala27_08/IncluirDisciplina.php" method="$_POST" style="font-family: JetBrains Mono;">
+  <form class="pure-form" action="funcExercicio2/IncluirDisciplina.php" method="POST" style="font-family: JetBrains Mono;">
     <fieldset>
       <legend>Incluir Disciplina</legend>
       <label for="nome">Nome:</label>
@@ -33,9 +38,27 @@
       <input type="text" name="professor" id="professor" required>
       <label for="cargaHoraria">Carga Horária:</label>
       <input type="number" name="cargaHoraria" id="cargaHoraria" required>
-      <button type="submit">Incluir</button>
+      <button type="submit" class="pure-button pure-button-primary">Cadastrar</button>
     </fieldset>
   </form>
+
+  <div>
+    <h2>Disciplinas</h2>
+    <table class="pure-table pure-table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Professor</th>
+          <th>Carga Horária</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+
+        ?>
+      </tbody>
+    </table>
+  </div>
 
 </body>
 
