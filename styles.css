@@ -1,0 +1,44 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #52525234;
+}
+
+.backgroundCube {
+  background-color: aqua;
+}
+
+.wrapper {
+  border-radius: 50%;
+  width: 50%;
+  margin: auto;
+}
+
+.pedro {
+  width: 100%;
+  scale: 1;
+}
+
+@keyframes bounce {
+  to {
+    translate: 0 20px;
+  }
+}
+
+@keyframes spin {
+  to {
+    rotate: -360deg;
+  }
+}
+
+.wrapper {
+  animation: spin 10s linear infinite;
+}
+
+.pedro {
+  animation: bounce 200ms linear infinite alternate;
+
+}
