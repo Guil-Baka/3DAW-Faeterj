@@ -1,5 +1,18 @@
 <?php
-require_once 'funcExercicio2/IncluirDisciplina.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $nome = $_POST['nome'];
+  $professor = $_POST['professor'];
+  $cargaHoraria = $_POST['cargaHoraria'];
+
+  // I will open the file in append mode
+  $file = fopen('disciplinas.txt', 'a');
+
+  // I will write the data in the file
+  fwrite($file, "$nome" . ';' . "$professor" . ';' . "$cargaHoraria" . PHP_EOL);
+
+  // I will close the file
+  fclose($file);
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +42,7 @@ require_once 'funcExercicio2/IncluirDisciplina.php';
 </head>
 
 <body>
-  <form class="pure-form" action="funcExercicio2/IncluirDisciplina.php" method="POST" style="font-family: JetBrains Mono;">
+  <form class="pure-form" action="exercicio2IncluirDisciplina.php" method="POST" style="font-family: JetBrains Mono;">
     <fieldset>
       <legend>Incluir Disciplina</legend>
       <label for="nome">Nome:</label>

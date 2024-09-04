@@ -1,10 +1,4 @@
 <?php
-// I will receive the data from the form in exercicio2IncluirDisciplina.php
-// and insert it into a txt file
-// the exercicio2IncluirDisciplina.php will use POST method to send the data
-// I will use the $_POST to receive the data
-
-// if method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $nome = $_POST['nome'];
   $professor = $_POST['professor'];
@@ -19,4 +13,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // I will close the file
   fclose($file);
 }
-return "Disciplina incluída com sucesso!";
