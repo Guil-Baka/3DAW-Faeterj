@@ -85,16 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="formDiv">
       <p>Cadastrar Disciplina</p>
       <form class="formAdjust pure-form" action="exercicio4ListarIncluirDisciplina.php" method="POST" style="font-family: JetBrains Mono;">
-        <label class="inputAdjust" for="nome">Nome:</label>
-        <input class="inputAdjust" type="text" name="nome" id="nome" required>
-        <label class="inputAdjust" for="professor">Professor:</label>
-        <input class="inputAdjust" type="text" name="professor" id="professor" required>
-        <label class="inputAdjust" for="cargaHoraria">Carga Horária:</label>
-        <input class="inputAdjust" type="number" name="cargaHoraria" id="cargaHoraria" required>
+        <input class="inputAdjust" type="text" name="nome" id="nome" placeholder="Nome" required>
+        <input class="inputAdjust" type="text" name="professor" id="professor" placeholder="Professor" required>
+        <input class="inputAdjust" type="number" name="cargaHoraria" id="cargaHoraria" placeholder="Carga Horaria" required>
         <button type="submit" class="pure-button pure-button-primary buttonAdjust">Cadastrar</button>
       </form>
     </div>
-
     <div class="tableDiv">
       <h2 style="font-family: JetBrains Mono;">Disciplinas</h2>
       <?php
