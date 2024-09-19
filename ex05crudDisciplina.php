@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>''
+<head>
   <script>
     function creatAjaxObject() {
       if (window.XMLHttpRequest) {
@@ -55,7 +55,8 @@
           buttons[i].onclick = function() {
             var searchPosition = this.id.replace("delete", "");
             var nome = getTableInfo(searchPosition);
-            deleteDisciplina(nome);
+            alert(nome + " " + searchPosition);
+            deleteDisciplina(getTableInfo(searchPosition));
           }
         }
       }

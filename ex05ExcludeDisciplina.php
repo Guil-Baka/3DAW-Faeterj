@@ -1,6 +1,8 @@
 <?php
 // receive via post name
 $name = $_POST["nome"];
+// for debug purposes show the name and a random number
+echo $name . " " . rand(0, 100);
 // read the file
 $file = fopen('disciplinas.txt', 'r');
 //create temporary file
@@ -19,4 +21,3 @@ fclose($temp);
 unlink('disciplinas.txt');
 // rename the temporary file to the original file
 rename('temp.txt', 'disciplinas.txt');
-echo $name;
