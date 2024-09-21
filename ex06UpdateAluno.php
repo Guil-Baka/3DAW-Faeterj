@@ -10,7 +10,7 @@ $newCpf = $_POST['newCpf'];
 $newDtNasc = $_POST['newDtNasc'];
 
 // Use js alert to show all the data received
-echo "<script>alert('$oldNome $oldMatricula $oldCpf $oldDtNasc $newNome $newMatricula $newCpf $newDtNasc');</script>";
+// echo "<script>alert('$oldNome $oldMatricula $oldCpf $oldDtNasc $newNome $newMatricula $newCpf $newDtNasc');</script>";
 
 // abre o arquivo de texto em lê linha por linha e colocando em um outro arquivo temporário
 $alunos = fopen("alunos.txt", "r");
@@ -22,7 +22,7 @@ while (!feof($alunos)) {
   $dados = explode(";", $linha);
   if ($dados[0] == $oldNome && $dados[1] == $oldMatricula && $dados[2] == $oldCpf && $dados[3]) {
     $linha = $newNome . ";" . $newMatricula . ";" . $newCpf . ";" . $newDtNasc . PHP_EOL;
-    echo "<script>alert('$linha');</script>";
+    // echo "<script>alert('$linha');</script>";
   }
   fwrite($temp, $linha);
 }

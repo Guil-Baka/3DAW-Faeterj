@@ -48,7 +48,8 @@
     }
 
     function responseHandler(response) {
-      alert(response);
+      // alert(response);
+      // n to mandando responde de qualquer jeito então melhor deixar comentado
     }
 
     function postAluno() {
@@ -57,7 +58,6 @@
       var cpf = document.getElementById("cpf").value;
       var dtNasc = document.getElementById("dtNasc").value;
       var data = "nome=" + nome + "&matricula=" + matricula + "&cpf=" + cpf + "&dtNasc=" + dtNasc;
-      alert(data);
       ajaxPost("ex06IncludeAluno.php", data, responseHandler);
     }
 
@@ -93,7 +93,7 @@
             entry.dtNasc = entry.dtNasc.slice(0, -1);
             document.getElementById("dtNasc").value = entry.dtNasc;
             // change the button to update the aluno
-            document.getElementById("formButton").innerHTML = "Update";
+            document.getElementById("formButton").innerHTML = '<i class="bi bi-arrow-clockwise"></i> Update';
             document.getElementById("formButton").onclick = function() {
               postUpdateAluno(entry.nome, entry.matricula, entry.cpf, entry.dtNasc);
             }
@@ -142,6 +142,25 @@
       handleDeleteAluno();
       changeButtonToUpdate();
     }
+
+    function dynamicSearch() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("singleSearchOnchange");
+      filter = input.value.toUpperCase();
+      table = document.getElementsByTagName("table")[0];
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
   </script>
   <style>
     body {
@@ -163,55 +182,108 @@
       border: none;
       background-color: transparent;
     }
+
+    .tableDiv {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      margin-top: 20px;
+      background-color: #2c2c2c;
+      padding: 25px;
+      padding-top: 10px;
+      border-radius: 25px;
+    }
+
+    .searchField {
+      margin: auto;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: none;
+      max-width: 300px;
+      padding: 5px;
+    }
+
+    .mainDiv {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .formDiv {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: #2c2c2c;
+      padding: 25px;
+      border-radius: 25px;
+
+    }
+
+    .outlineButton {
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 5px;
+      background-color: transparent;
+      color: white;
+    }
+
+    .outlineButton:hover {
+      background-color: white;
+      color: black;
+    }
   </style>
 </head>
 
 <body onload="changeButtons()">
 
-  <div>
-    <form id="cadAlun" action="">
+  <div class="mainDiv">
+    <form class="formDiv" id="cadAlun" action="">
       <legend>Cadastro de Alunos</legend>
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
+      <input class="searchField" type="text" id="nome" name="nome" required>
       <label for="matricula">Matrícula:</label>
-      <input type="text" id="matricula" name="matricula" required>
+      <input class="searchField" type="text" id="matricula" name="matricula" required>
       <label for="cpf">CPF:</label>
-      <input type="text" id="cpf" name="cpf" required>
+      <input class="searchField" type="text" id="cpf" name="cpf" required>
       <label for="dtNasc">Data de Nascimento:</label>
-      <input type="date" id="dtNasc" name="dtNasc" required>
-      <button type="submit" id="formButton" onclick="event.preventDefault(); postAluno();">Cadastrar</button>
+      <input class="searchField" type="date" id="dtNasc" name="dtNasc" required>
+      <button class="outlineButton" type="submit" id="formButton" onclick="event.preventDefault(); postAluno();">
+        <i class="bi bi-check-all"></i>
+        Cadastrar</button>
     </form>
 
     <!-- table to show aluno -->
-    <table class="pure-table pure-table-horizontal">
-      <thead>
-        <tr>
-          <th>Posição</th>
-          <th>Nome</th>
-          <th>Matrícula</th>
-          <th>CPF</th>
-          <th>Data de Nascimento</th>
-          <th>Actions</th>
-        </tr>
-        <!-- for each aluno in the txt file, print on the table -->
-        <?php
-        $file = fopen('alunos.txt', 'r');
-        $i = 1;
-        // count the number of lines in the file before printing the table
-        $lines = count(file('alunos.txt'));
-        // print lines
-        echo $lines;
-        // instead of printing until feof, print until the number of lines in the file is reached
-        while ($i <= $lines) {
-          $line = fgets($file);
-          $data = explode(';', $line);
-          echo "<tr>";
-          echo "<td>" . $i . "</td>";
-          echo "<td>" . $data[0] . "</td>";
-          echo "<td>" . $data[1] . "</td>";
-          echo "<td>" . $data[2] . "</td>";
-          echo "<td>" . $data[3] . "</td>";
-          echo "<td>
+    <div class="tableDiv">
+      <table class="pure-table pure-table-horizontal">
+        <thead>
+          <tr>
+            <th>Posição</th>
+            <th>Nome</th>
+            <th>Matrícula</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Actions</th>
+          </tr>
+          <!-- for each aluno in the txt file, print on the table -->
+          <?php
+          $file = fopen('alunos.txt', 'r');
+          $i = 1;
+          // count the number of lines in the file before printing the table
+          $lines = count(file('alunos.txt'));
+          // instead of printing until feof, print until the number of lines in the file is reached
+          while ($i <= $lines) {
+            $line = fgets($file);
+            $data = explode(';', $line);
+            echo "<tr>";
+            echo "<td>" . $i . "</td>";
+            echo "<td>" . $data[0] . "</td>";
+            echo "<td>" . $data[1] . "</td>";
+            echo "<td>" . $data[2] . "</td>";
+            echo "<td>" . $data[3] . "</td>";
+            echo "<td>
             <button id='delete" . $i . "'>
             <i class='bi bi-person-fill-x'></i>
             </button>
@@ -219,14 +291,19 @@
             <i class='bi bi-person-lines-fill'></i>
             </button>
           </td>";
-          echo "</tr>";
-          $i++;
-        }
-        fclose($file);
-        ?>
-      </thead>
-      <tbody id="alunos">
-      </tbody>
+            echo "</tr>";
+            $i++;
+          }
+          fclose($file);
+          ?>
+        </thead>
+        <!-- add text field input -->
+        <form action="">
+          <input placeholder="Buscar" class="searchField" type="text" id="singleSearchOnchange" oninput="dynamicSearch()">
+        </form>
+      </table>
+    </div>
+
   </div>
 </body>
 
