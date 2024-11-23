@@ -62,12 +62,12 @@
       var cpf = document.getElementById("cpf").value;
       var dtNasc = document.getElementById("dtNasc").value;
       var data = "nome=" + nome + "&matricula=" + matricula + "&cpf=" + cpf + "&dtNasc=" + dtNasc;
-      ajaxPost("ex06IncludeAluno.php", data, responseHandler);
+      ajaxPost("ex07IncludeAluno.php", data, responseHandler);
     }
 
     function postNameAluno(nome) {
       var data = "nome=" + nome;
-      ajaxPost("ex06ExcludeAluno.php", data, responseHandler);
+      ajaxPost("ex07ExcludeAluno.php", data, responseHandler);
     }
 
     function postUpdateAluno(oldNome, oldMatricula, oldCpf, oldDtNasc) {
@@ -76,7 +76,7 @@
       var newCpf = document.getElementById("cpf").value;
       var newDtNasc = document.getElementById("dtNasc").value;
       var data = "nome=" + oldNome + "&matricula=" + oldMatricula + "&cpf=" + oldCpf + "&dtNasc=" + oldDtNasc + "&newNome=" + newNome + "&newMatricula=" + newMatricula + "&newCpf=" + newCpf + "&newDtNasc=" + newDtNasc;
-      ajaxPost("ex06UpdateAluno.php", data, responseHandler);
+      ajaxPost("ex07UpdateAluno.php", data, responseHandler);
       // change the button back to Cadastrar after updating the aluno
       document.getElementById("formButton").innerHTML = "Cadastrar";
 
