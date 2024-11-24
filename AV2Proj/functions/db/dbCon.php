@@ -10,13 +10,14 @@ function dbCon()
   $conn .= "host=" . $fields["host"];
   $conn .= ";port=" . $fields["port"];
   $conn .= ";dbname=defaultdb";
-  $conn .= ";sslmode=verify-ca;sslrootcert=C:/xampp/htdocs/3DAW-Faeterj/AV2Proj/ca.pem";
+  $conn .= ";sslmode=verify-ca;sslrootcert=C:/xampp/htdocs/caminho.pem";
+  // $conn .= ";sslmode=verify-ca;sslrootcert=C:/xampp/htdocs/3DAW-Faeterj/AV2Proj/ca.pem";.
 
   $db = new PDO($conn, $fields["user"], $fields["pass"]);
 
-  // foreach ($db->query("SELECT VERSION()") as $row) {
-  //   print($row[0]);
-  // }
+  //foreach ($db->query("SELECT VERSION()") as $row) {
+  //  print($row[0]);
+ // }
 
   // foreach ($db->query("SELECT * FROM users") as $row) {
   //   print($row[0]);
@@ -24,7 +25,5 @@ function dbCon()
 
   return $db;
 }
-
-
 
 // dbCon();
