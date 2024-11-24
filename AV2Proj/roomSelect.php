@@ -19,10 +19,27 @@
   <link rel="stylesheet" href="normalize.css">
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
+  <script> 
+  function roomList() {
+      $.ajax({
+        url: 'functions/db/getRoomList.php',
+        type: 'GET',
+        success: function(rooms) {
+          console.log(rooms);
+          // 
+          // Parses the rooms object from JSON format and sets the stored session with the rooms's listing.
+          //  
+          // @param {string} rooms - The rooms object in JSON format.
+          //  
+          rooms = JSON.parse(rooms);
+        }
+      });
+      } 
+      </script>
   <title>Listagem quartos</title>
 </head>
 
-<body>
+<body onload="roomList()">
 <div class="div-generic">
     <form action="roomSelect.php" method="POST">
       <legend>Selecione a Data Inicial</legend>
@@ -32,6 +49,7 @@
       <button class="outline-confirm-button">Verificar Disponibilidade</button>
 
     </form>
+    
   </div>
 
 
