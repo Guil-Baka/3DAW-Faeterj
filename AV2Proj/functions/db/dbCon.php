@@ -10,8 +10,7 @@ function dbCon()
   $conn .= "host=" . $fields["host"];
   $conn .= ";port=" . $fields["port"];
   $conn .= ";dbname=defaultdb";
-  $conn .= ";sslmode=verify-ca;sslrootcert=C:/xampp/htdocs/caminho.pem";
-  // $conn .= ";sslmode=verify-ca;sslrootcert=C:/xampp/htdocs/3DAW-Faeterj/AV2Proj/ca.pem";.
+  $conn .= ";sslmode=verify-ca;sslrootcert=C:/xampp/htdocs/3DAW-Faeterj/AV2Proj/ca.pem";
 
   $db = new PDO($conn, $fields["user"], $fields["pass"]);
 
