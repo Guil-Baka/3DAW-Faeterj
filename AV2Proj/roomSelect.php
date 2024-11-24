@@ -23,7 +23,18 @@
 </head>
 
 <body>
+<div class="div-generic">
+    <form action="roomSelect.php" method="POST">
+      <legend>Selecione a Data Inicial</legend>
+      <input type="date">
+      <legend>Selecione a Data Final</legend>
+      <input type="date">
+      <button class="outline-confirm-button">Verificar Disponibilidade</button>
+
+    </form>
+  </div>
+
 
 </body>
 
-</html>
+</html> 

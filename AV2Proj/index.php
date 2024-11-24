@@ -98,7 +98,7 @@
     </div>
     <nav class="nav-container">
 
-      <button style=""
+      <button
         id="submit"
         class="outline-button"
         onclick="login('guilam.dev@gmail.com','password123')">
@@ -139,7 +139,7 @@
     </div>
   </div>
   <div class="div-generic">
-    <form action="">
+    <form action="roomSelect.php" method="POST">
       <legend>Selecione a Data Inicial</legend>
       <input type="date">
       <legend>Selecione a Data Final</legend>
