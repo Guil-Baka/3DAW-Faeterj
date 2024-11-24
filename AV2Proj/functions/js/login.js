@@ -10,9 +10,18 @@ function login() {
   var data = {email: email, password: password};
   $.ajax({
     type: "POST",
-    url: "functions/php/userLogin.php",
+    url: "functions/db/getUser.php",
     data: data,
     
-    
+    success: function(data) {
+      var data = JSON.parse(data);
+      if (data.error) {
+        alert(data.error);
+      } else {
+        alert("User logged in");
+      }
+      
+    }
   });
+
 }

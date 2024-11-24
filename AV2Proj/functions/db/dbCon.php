@@ -14,11 +14,17 @@ function dbCon()
 
   $db = new PDO($conn, $fields["user"], $fields["pass"]);
 
-  foreach ($db->query("SELECT VERSION()") as $row) {
-    print($row[0]);
-  }
+  // foreach ($db->query("SELECT VERSION()") as $row) {
+  //   print($row[0]);
+  // }
+
+  // foreach ($db->query("SELECT * FROM users") as $row) {
+  //   print($row[0]);
+  // }
 
   return $db;
 }
 
-dbCon();
+
+
+// dbCon();

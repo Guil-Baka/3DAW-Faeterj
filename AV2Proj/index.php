@@ -17,19 +17,96 @@
   <link rel="stylesheet" href="normalize.css">
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   <!-- import script from /functions/js -->
-  <script src="functions/js/login.js"></script>
+  <script>
+    /**
+     * Sets the stored session with the provided email.
+     *
+     * @param string $email The email to be stored in the session.
+     * @return void
+     */
+    function setStoredSession($email) {
+      console.log($email);
+
+      localStorage.setItem('email', $email);
+      // Date.now() and add 24 hours
+      localStorage.setItem('expires', Date.now() + 86400000);
+    }
+
+    /**
+     * Retrieves the stored session email from the local storage.
+     * If the stored session has expired, it removes the email and returns null.
+     * Otherwise, it returns the stored email.
+     *
+     * @return string|null The stored session email or null if the session has expired or is not found.
+     */
+    function getStoredSession() {
+
+      let email = localStorage.getItem('email');
+      let expires = localStorage.getItem('expires');
+
+      if (email && expires) {
+        if (Date.now() > expires) {
+          localStorage.removeItem('email');
+          localStorage.removeItem('expires');
+          return null;
+        } else {
+          console.log(email);
+          return email;
+        }
+      } else {
+        return null;
+      }
+    }
+
+
+    // Logs in a user by sending an AJAX request to the server.
+
+    // @param string $email The user's email address.
+    // @param string $password The user's password.
+    // @return void
+
+    function login(email, password) {
+      // console.log(email + " " + password);
+      catchEmail = email;
+      catchPassword = password;
+
+      $.ajax({
+        url: 'functions/db/getUser.php',
+        type: 'GET',
+        data: {
+          email: email,
+          password: password
+        },
+        success: function(user) {
+          console.log(user);
+          // 
+          // Parses the user object from JSON format and sets the stored session with the user's email.
+          //  
+          // @param {string} user - The user object in JSON format.
+          //  
+          user = JSON.parse(user);
+          setStoredSession(user.email);
+        }
+      });
+    }
+  </script>
 
   <title>Hostel Mediterrâneo</title>
 </head>
 
-<body class="body-dark">
+<body class="body-dark" onload="getStoredSession()">
   <div class="header">
     <!-- get svg -->
     <div class="img-container">
       <img src="assets/svgs/Logo.svg" alt="">
     </div>
     <nav class="nav-container">
-      <button id="submit" class="outline-button" onclick="login()"> Login</button>
+
+      <button style=""
+        id="submit"
+        class="outline-button"
+        onclick="login('guilam.dev@gmail.com','password123')">
+        Login</button>
   </div>
   <div class="div-container div-container-dark">
     <div class="slideshow-container">
