@@ -8,7 +8,7 @@ function dbCon()
   // build the DSN including SSL settings
   $conn = "pgsql:";
   $conn .= "host=" . $fields["host"];
-  $conn .= ";port=" . $fields["port"];;
+  $conn .= ";port=" . $fields["port"];
   $conn .= ";dbname=defaultdb";
   $conn .= ";sslmode=verify-ca;sslrootcert=C:/xampp/htdocs/3DAW-Faeterj/AV2Proj/ca.pem";
 
