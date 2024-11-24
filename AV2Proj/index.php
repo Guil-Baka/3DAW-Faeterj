@@ -66,10 +66,6 @@
     // @return void
 
     function login(email, password) {
-      // console.log(email + " " + password);
-      catchEmail = email;
-      catchPassword = password;
-
       $.ajax({
         url: 'functions/db/getUser.php',
         type: 'GET',
