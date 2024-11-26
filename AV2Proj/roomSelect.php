@@ -168,15 +168,21 @@
     }
 
     function handleReservationList(reservations) {
-      console.log(reservations);
-      reservations.forEach(reservation => {
+      console.log(rooms);
+      let i = 0;
+      rooms.forEach(room => {
         var row = document.createElement('tr');
         row.innerHTML = `
-          <td>${reservation.room_number}</td>
-          <td>${reservation.start_date}</td>
-          <td>${reservation.end_date}</td>
+          <td>${room.name}</td>
+          <td>${room.description}</td>
+          <td>${room.price}</td>
+          <td>${room.num}</td>
+          <td>${room.num_beds}</td>
+          <td><button id='reserve${i}' onclick='handlePostReservation(${i})'>Reservar</button></td>
         `;
-        document.getElementById('reserveList').appendChild(row);
+        document.getElementById('roomList').appendChild(row);
+
+        i++;
       });
     }
 
