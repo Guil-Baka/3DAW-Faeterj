@@ -170,14 +170,14 @@
     function handleReservationList(reservations) {
       console.log(reservations);
       let i = 0;
-      reservations.forEach(room => {
+      reservations.forEach(reservations => {
         var row = document.createElement('tr');
         row.innerHTML = `
-          <td>${room.name}</td>
-          <td>${room.description}</td>
-          <td>${room.price}</td>
-          <td>${room.num}</td>
-          <td>${room.num_beds}</td>
+          <td>${reservations.name}</td>
+          <td>${reservations.description}</td>
+          <td>${reservations.price}</td>
+          <td>${reservations.num}</td>
+          <td>${reservations.num_beds}</td>
           <td><button id='reserve${i}' onclick='handlePostReservation(${i})'>Reservar</button></td>
         `;
         document.getElementById('roomList').appendChild(row);
