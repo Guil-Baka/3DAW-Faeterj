@@ -150,6 +150,36 @@
       });
     }
 
+    function reservationList() {
+      $.ajax({
+        url: 'functions/db/getReservation.php',
+        type: 'GET',
+        data: {
+          userEmail: getStoredSession()
+        },
+        success: function(response) {
+          console.log(response);
+          const reservations = JSON.parse(response);
+          if (callback) {
+            callback(reservations);
+          }
+        }
+      });
+    }
+
+    function handleReservationList(reservations) {
+      console.log(reservations);
+      reservations.forEach(reservation => {
+        var row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${reservation.room_number}</td>
+          <td>${reservation.start_date}</td>
+          <td>${reservation.end_date}</td>
+        `;
+        document.getElementById('reserveList').appendChild(row);
+      });
+    }
+
     function handlePostReservation(searchPosition) {
       table = getTableEntry(searchPosition);
       postReservation(document.getElementById('dateStart').value, document.getElementById('dateEnd').value, table.num);
@@ -212,6 +242,25 @@
       <tbody id="roomList">
         <script>
           roomList(handleRoomList);
+        </script>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <table class="pure-table pure-table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Preço</th>
+          <th>Número</th>
+          <th>Número de Camas</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="reserveList">
+        <script>
+          handleReservationList(reservationList);
         </script>
       </tbody>
     </table>
