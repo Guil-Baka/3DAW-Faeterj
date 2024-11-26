@@ -136,19 +136,9 @@
         oferecemos descontos para o almoço em um restaurante proximo.</p>
     </div>
     <div class="div-generic">
+      <button class="outline-confirm-button" onclick="window.location.href = 'roomSelect.php';">Exibir Quartos</button>
     </div>
   </div>
-  <div class="div-generic">
-    <form action="roomSelect.php" method="POST">
-      <legend>Selecione a Data Inicial</legend>
-      <input type="date">
-      <legend>Selecione a Data Final</legend>
-      <input type="date">
-      <button class="outline-confirm-button">Verificar Disponibilidade</button>
-
-    </form>
-  </div>
-
 </body>
 
 </html>

@@ -1,9 +1,11 @@
 <?php
 include 'dbCon.php';
+@$startDate = $_GET['startDate'];
+@$endDate = $_GET['endDate'];
 // error_reporting(0);
 $db = dbCon();
-
-$query = "SELECT * FROM rooms";
+// find all rooms not currently reserved based on the start and end date 
+$query = "SELECT * FROM rooms WHERE id NOT IN (SELECT room_id FROM reservations WHERE start_date <= '$endDate' AND end_date >= '$startDate')";
 $stmt = $db->query($query);
 
 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
