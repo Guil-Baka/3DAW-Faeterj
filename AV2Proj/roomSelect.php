@@ -168,9 +168,9 @@
     }
 
     function handleReservationList(reservations) {
-      console.log(rooms);
+      console.log(reservations);
       let i = 0;
-      rooms.forEach(room => {
+      reservations.forEach(room => {
         var row = document.createElement('tr');
         row.innerHTML = `
           <td>${room.name}</td>
