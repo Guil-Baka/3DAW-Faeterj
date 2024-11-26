@@ -5,7 +5,7 @@ include 'dbCon.php';
 @$user_email = $_GET['userEmail'];
 
 
-// @$user_email = 'guilam.dev@gmail.com';
+//@$user_email = 'guilam.dev@gmail.com';
 
 
 // check if any of the fields are empty
