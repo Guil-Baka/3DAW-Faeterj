@@ -68,6 +68,11 @@
       });
     }
 
+    /**
+     * Handles the list of rooms and displays them in a table.
+     *
+     * @param {Array} rooms - The array of rooms to be displayed.
+     */
     function handleRoomList(rooms) {
       console.log(rooms);
       let i = 0;
@@ -80,8 +85,7 @@
           <td>${room.num}</td>
           <td>${room.num_beds}</td>
           <td><button id='reserve${i}' onclick='handlePostReservation(${i})'>Reservar</button></td>
-
-          `;
+        `;
         document.getElementById('roomList').appendChild(row);
 
         i++;
@@ -107,6 +111,12 @@
       }
     }
 
+    /**
+     * Retrieves the data from a specific row in the roomList table.
+     *
+     * @param {number} searchPosition - The position of the row to retrieve the data from.
+     * @returns {object} - An object containing the data from the specified row.
+     */
     function getTableEntry(searchPosition) {
       var table = document.getElementById('roomList');
       var row = table.rows[searchPosition];
