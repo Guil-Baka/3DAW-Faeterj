@@ -255,11 +255,10 @@
     <table class="pure-table pure-table-bordered">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Preço</th>
-          <th>Número</th>
-          <th>Número de Camas</th>
+          <th>Nome do Quarto</th>
+          <th>Numero do Quarto</th>
+          <th>Data Check-in</th>
+          <th>Data Check-out</th>
           <th></th>
         </tr>
       </thead>
