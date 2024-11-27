@@ -58,9 +58,9 @@ if (empty($user_email)) {
     array_push($reservationList, $reservationObj);
   }
 
-  print_r($reservationList);
+  // print_r($reservationList);
 
   // return reservation object
   header('HTTP/1.1 200 OK');
-  echo json_encode($reservations);
+  echo json_encode($reservationList);
 }
