@@ -131,6 +131,39 @@
       return entry;
     }
 
+    function reservationList(callback) {
+      $.ajax({
+        url: 'functions/db/getReservation.php',
+        type: 'GET',
+        data: {
+          userEmail: getStoredSession()
+        },
+        success: function(reservations) {
+          console.log(reservations);
+          const list = JSON.parse(reservations);
+          if (callback) {
+            callback(list);
+          }
+        }
+      });
+    }
+
+    function handleReservationList(reservations) {
+      console.log(reservations);
+      let i = 0;
+      reservations.forEach(reservation => {
+        var row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${reservation.room_id}</td>
+          <td>${reservation.start_date}</td>
+          <td>${reservation.end_date}</td>
+          <td><button id='cancel${i}'>Cancelar</button></td>
+          <td><button id='update${i}'>Alterar</button></td>
+        `;
+        document.getElementById('reserveList').appendChild(row);
+        i++;
+      });
+    }
 
     function postReservation(startDate, endDate, roomNumber) {
       //debug prints
@@ -147,42 +180,6 @@
         success: function(response) {
           console.log(response);
         }
-      });
-    }
-
-    function reservationList() {
-      $.ajax({
-        url: 'functions/db/getReservation.php',
-        type: 'GET',
-        data: {
-          userEmail: getStoredSession()
-        },
-        success: function(response) {
-          console.log(response);
-          const reservations = JSON.parse(response);
-          if (callback) {
-            callback(reservations);
-          }
-        }
-      });
-    }
-
-    function handleReservationList(reservations) {
-      console.log(reservations);
-      let i = 0;
-      reservations.forEach(reservations => {
-        var row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${reservations.name}</td>
-          <td>${reservations.description}</td>
-          <td>${reservations.price}</td>
-          <td>${reservations.num}</td>
-          <td>${reservations.num_beds}</td>
-          <td><button id='reserve${i}' onclick='handlePostReservation(${i})'>Reservar</button></td>
-        `;
-        document.getElementById('roomList').appendChild(row);
-
-        i++;
       });
     }
 
@@ -207,6 +204,7 @@
 
     function loadPage() {
       changeValueOnDateComponent();
+      // reservationList();
     }
   </script>
   <title>Listagem quartos</title>
@@ -266,7 +264,7 @@
       </thead>
       <tbody id="reserveList">
         <script>
-          handleReservationList(reservationList);
+          reservationList(handleReservationList);
         </script>
       </tbody>
     </table>
