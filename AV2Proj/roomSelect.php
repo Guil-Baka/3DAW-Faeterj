@@ -154,7 +154,8 @@
       reservations.forEach(reservation => {
         var row = document.createElement('tr');
         row.innerHTML = `
-          <td>${reservation.room_id}</td>
+          <td>${reservation.room_name}</td>
+          <td>${reservation.room_number}</td>
           <td>${reservation.start_date}</td>
           <td>${reservation.end_date}</td>
           <td><button id='cancel${i}'>Cancelar</button></td>
