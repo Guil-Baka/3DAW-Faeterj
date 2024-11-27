@@ -9,11 +9,11 @@ include 'dbCon.php';
 @$descri = $_POST['descri'];
 
 // generate random values for debugging
-$room_number = 101;
-$roomName = 'Quarto 101';
-$price = 100.00;
-$number_of_beds = 2;
-$descri = 'Quarto com cama de casal e banheiro privativo';
+// $room_number = 101;
+// $roomName = 'Quarto 101';
+// $price = 100.00;
+// $number_of_beds = 2;
+// $descri = 'Quarto com cama de casal e banheiro privativo';
 
 
 // check if any of the fields are empty
