@@ -131,6 +131,70 @@
       return entry;
     }
 
+    function getTableEntryReservations(searchPosition) {
+      var table = document.getElementById('reserveList');
+      var row = table.rows[searchPosition];
+      var entry = {
+        room_name: row.cells[0].innerHTML,
+        room_number: row.cells[1].innerHTML,
+        start_date: row.cells[2].innerHTML,
+        end_date: row.cells[3].innerHTML
+      }
+      console.log(entry);
+      return entry;
+    }
+
+    function handleReserveCancelation(searchPosition) {
+      table = getTableEntryReservations(searchPosition);
+      console.log(table);
+      $.ajax({
+        url: 'functions/db/excludeReservation.php',
+        type: 'POST',
+        data: {
+          roomNumber: table.room_number,
+          userEmail: getStoredSession(),
+          startDate: table.start_date,
+          endDate: table.end_date
+        },
+        success: function(response) {
+          console.log(response);
+        }
+      });
+    }
+
+    function handleUpdateButton(searchPosition) {
+      //print the searchPosition
+      console.log("HandleUpdateButton: " + searchPosition);
+      // change the button with ID sendInfo innerhtml to "Alterar"
+      document.getElementsByName('sendInfo').innerHTML = "Alterar";
+      // change the button with ID sendInfo onclick to handleReserveUpdate
+      document.getElementsByName('sendInfo').onclick = handleReserveUpdate(searchPosition);
+    }
+
+    function handleReserveUpdate(searchPosition) {
+      table = getTableEntryReservations(searchPosition);
+      console.log(table);
+      $.ajax({
+        url: 'functions/db/updateReservation.php',
+        type: 'POST',
+        data: {
+          roomNumber: table.room_number,
+          userEmail: getStoredSession(),
+          oldStartDate: table.start_date,
+          oldEndDate: table.end_date,
+          startDate: document.getElementById('dateStart').value,
+          endDate: document.getElementById('dateEnd').value
+        },
+        success: function(response) {
+          console.log(response);
+          // change the button with ID sendInfo innerhtml to "Verificar Disponibilidade"
+          document.getElementsByName('sendInfo').innerHTML = "Verificar Disponibilidade";
+          // change the button with ID sendInfo onclick to nothing
+          document.getElementsByName('sendInfo').onclick = "";
+        }
+      });
+    }
+
     function reservationList(callback) {
       $.ajax({
         url: 'functions/db/getReservation.php',
@@ -158,8 +222,10 @@
           <td>${reservation.room_number}</td>
           <td>${reservation.start_date}</td>
           <td>${reservation.end_date}</td>
-          <td><button id='cancel${i}'>Cancelar</button></td>
-          <td><button id='update${i}'>Alterar</button></td>
+          <td><button id='cancel${i}' onClick='handleReserveCancelation(${i})' >Cancelar</button>
+          <button id='update${i}' onClick='handleUpdateButton(${i})'>
+          Alterar Data de Reserva
+          </button></td>
         `;
         document.getElementById('reserveList').appendChild(row);
         i++;
@@ -227,7 +293,7 @@
       <input id="dateStart" type="date">
       <legend>Selecione a Data Final</legend>
       <input id="dateEnd" type="date">
-      <button class="outline-confirm-button">Verificar Disponibilidade</button>
+      <button id="sendInfo" class="outline-confirm-button">Verificar Disponibilidade</button>
     </form>
   </div>
 
@@ -245,6 +311,7 @@
         </tr>
       </thead>
       <tbody id="roomList">
+        <h1>Lista de Quartos</h1>
         <script>
           roomList(handleRoomList);
         </script>
@@ -263,6 +330,8 @@
         </tr>
       </thead>
       <tbody id="reserveList">
+        <h1>Reservas do Usuário</h1>
+        <p>Para mudar o periodo da reserva, no inicio da pagina coloque a data nova e clique no botão "Alterar Data de Reserva" ao lado da reserva que deseja alterar</p>
         <script>
           reservationList(handleReservationList);
         </script>
