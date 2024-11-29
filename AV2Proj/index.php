@@ -85,12 +85,27 @@
         }
       });
     }
+
+    function hideLoginButton() {
+      // check if the user is already logged in
+      if (getStoredSession()) {
+        document.getElementById('submit').style.display = 'none';
+        console.log("Usuário já logado, escondando botão de login.");
+      } else {
+        document.getElementById('submit').style.display = 'block';
+      }
+    }
+
+    function loadHomePage() {
+      hideLoginButton();
+      getStoredSession();
+    }
   </script>
 
   <title>Hostel Mediterrâneo</title>
 </head>
 
-<body class="body-dark" onload="getStoredSession()">
+<body class="body-dark" onload="loadHomePage()">
   <div class="header">
     <!-- get svg -->
     <div class="img-container">
