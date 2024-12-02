@@ -32,40 +32,52 @@
     </div>
     <script>
         function createRoom(roomNumber,numberOfBeds,roomName,descri,price){
+            event.preventDefault();
             $.ajax({
         url: 'functions/db/postRoom.php',
         type: 'POST',
         data: {
             roomNumber: roomNumber,
-            roomNumber: numberOfBeds,
+            numberOfBeds: numberOfBeds,
             roomName: roomName,
             descri: descri,
             price: price
+        },
+        success(response){
+            console.log(response);
         }
     });
         }
         
     function alterRoom(roomNumber,numberOfBeds,roomName,descri,price){
+        event.preventDefault();
         $.ajax({
         url: 'functions/db/updateRoom.php',
         type: 'POST',
         data: {
             roomNumber: roomNumber,
-            roomNumber: numberOfBeds,
+            numberOfBeds: numberOfBeds,
             roomName: roomName,
             descri: descri,
             price: price
+        },
+        success(response){
+            console.log(response);
         }
         
         });
         }
 
         function deleteRoom(roomNumber){
+            event.preventDefault();
             $.ajax({
         url: 'functions/db/excludeRoom.php',
         type: 'POST',
         data: {
             roomNumber: roomNumber
+        },
+        success(response){
+            console.log(response);
         }
     });
         }
@@ -73,7 +85,7 @@
     </script>
 
     <div class="div-generic">
-        <form action="/adm.php" method="post">
+        <form action="adm.php" method="post">
         <legend>Numero do quarto</legend>
         <input id="roomNumber" type="number"><br><br>
         
@@ -89,9 +101,17 @@
         <legend>preco do quarto</legend>
         <input id="price" type="text"><br><br>
         
-        <button id='criar' onclick='createRoom()'>Criar quarto</button>
-        <button id='alterar' onclick='alterRoom()'>Alterar quarto</button>
-        <button id='deletar' onclick='deleteRoom()'>Deletar quarto</button>
+        <button id='criar' onclick="createRoom(document.getElementById('roomNumber').value, 
+        document.getElementById('numberOfBeds').value,
+        document.getElementById('roomName').value,
+        document.getElementById('descri').value, 
+        document.getElementById('price').value)">Criar quarto</button>
+        <button id='alterar' onclick="alterRoom(document.getElementById('roomNumber').value, 
+        document.getElementById('numberOfBeds').value,
+        document.getElementById('roomName').value,
+        document.getElementById('descri').value, 
+        document.getElementById('price').value)">Alterar quarto</button>
+        <button id='deletar' onclick="deleteRoom(document.getElementById('roomNumber').value)">Deletar quarto</button>
         </form>
     </div>
 </body>

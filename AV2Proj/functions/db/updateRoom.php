@@ -34,7 +34,8 @@ if (empty($roomName) || empty($number_of_beds) || empty($price) || empty($room_n
     $room_number = intval($room_number);
     $number_of_beds = intval($number_of_beds);
 
-    $query1 = "SELECT id FROM rooms WHERE number = $room_number";
+    $query = "SELECT id FROM rooms WHERE number = $room_number";
+    $stmt = $db->query($query);
     $room_id = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['id'];
    // (name,price,number,number_of_beds,description)
     $query = " UPDATE rooms SET name = '$roomName', price = '$price', number = '$room_number',number_of_beds = '$number_of_beds', description = '$descri'WHERE id= $room_id ";
