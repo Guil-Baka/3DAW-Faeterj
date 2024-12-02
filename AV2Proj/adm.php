@@ -32,14 +32,42 @@
     </div>
     <script>
         function createRoom(roomNumber,numberOfBeds,roomName,descri,price){
-            
+            $.ajax({
+        url: 'functions/db/postRoom.php',
+        type: 'POST',
+        data: {
+            roomNumber: roomNumber,
+            roomNumber: numberOfBeds,
+            roomName: roomName,
+            descri: descri,
+            price: price
+        }
+    });
         }
         
     function alterRoom(roomNumber,numberOfBeds,roomName,descri,price){
-            
+        $.ajax({
+        url: 'functions/db/updateRoom.php',
+        type: 'POST',
+        data: {
+            roomNumber: roomNumber,
+            roomNumber: numberOfBeds,
+            roomName: roomName,
+            descri: descri,
+            price: price
         }
+        
+        });
+        }
+
         function deleteRoom(roomNumber){
-            
+            $.ajax({
+        url: 'functions/db/excludeRoom.php',
+        type: 'POST',
+        data: {
+            roomNumber: roomNumber
+        }
+    });
         }
 
     </script>

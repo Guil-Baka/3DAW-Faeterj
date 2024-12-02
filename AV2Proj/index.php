@@ -112,7 +112,8 @@
       <img src="assets/svgs/Logo.svg" alt="">
     </div>
     <nav class="nav-container">
-
+    <button 
+    class="outline-confirm-button" onclick="window.location.href = 'adm.php';">adm</button>
       <button
         id="submit"
         class="outline-button"
