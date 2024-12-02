@@ -22,7 +22,7 @@
   <script>
     function roomListNonReserved(callback, startDate, endDate) {
       $.ajax({
-        url: 'functions/db/returnRoomsNotReserved.php',
+        url: 'functions/db/getNonReservedRoomList.php',
         type: 'GET',
         data: {
           startDate: document.getElementById('dateStart').value,
@@ -40,20 +40,26 @@
 
     function handleNonReservedRoomList(rooms) {
       console.log(rooms);
+      let i = 0;
       rooms.forEach(room => {
         var row = document.createElement('tr');
         row.innerHTML = `
           <td>${room.name}</td>
           <td>${room.description}</td>
           <td>${room.price}</td>
-          <td>${room.num}</td>
-          <td>${room.num_beds}</td>
+          <td>${room.number}</td>
+          <td>${room.number_of_beds}</td>
+          <td><button id='reserve${i}' onclick='handlePostReservation(${i})'>Reservar</button></td>
         `;
         document.getElementById('roomList').appendChild(row);
+
+        i++;
       });
     }
 
     function roomList(callback) {
+      // DEPRECATED
+      // REPLACED BY roomListNonReserved
       $.ajax({
         url: 'functions/db/getRoomList.php',
         type: 'GET',
@@ -74,6 +80,8 @@
      * @param {Array} rooms - The array of rooms to be displayed.
      */
     function handleRoomList(rooms) {
+      // DEPRECATED
+      // REPLACED BY handleNonReservedRoomList
       console.log(rooms);
       let i = 0;
       rooms.forEach(room => {
@@ -162,15 +170,6 @@
       });
     }
 
-    function handleUpdateButton(searchPosition) {
-      //print the searchPosition
-      console.log("HandleUpdateButton: " + searchPosition);
-      // change the button with ID sendInfo innerhtml to "Alterar"
-      document.getElementsByName('sendInfo').innerHTML = "Alterar";
-      // change the button with ID sendInfo onclick to handleReserveUpdate
-      document.getElementsByName('sendInfo').onclick = handleReserveUpdate(searchPosition);
-    }
-
     function handleReserveUpdate(searchPosition) {
       table = getTableEntryReservations(searchPosition);
       console.log(table);
@@ -223,7 +222,7 @@
           <td>${reservation.start_date}</td>
           <td>${reservation.end_date}</td>
           <td><button id='cancel${i}' onClick='handleReserveCancelation(${i})' >Cancelar</button>
-          <button id='update${i}' onClick='handleUpdateButton(${i})'>
+          <button id='update${i}' onClick='handleReserveUpdate(${i})'>
           Alterar Data de Reserva
           </button></td>
         `;
@@ -273,6 +272,26 @@
       changeValueOnDateComponent();
       // reservationList();
     }
+
+    function clearTable(table) {
+      while (table.rows.length > 0) {
+        table.deleteRow(0);
+      }
+    }
+
+    function reloadLists() {
+      // prevent default form behavior
+      event.preventDefault();
+
+      // clear the table of rooms
+      clearTable(document.getElementById('roomList'));
+      // calls the roomList function to update the list of rooms
+      roomListNonReserved(handleNonReservedRoomList);
+      // clear the table of reservations
+      clearTable(document.getElementById('reserveList'));
+      // calls the reservationList function to update the list of reservations
+      reservationList(handleReservationList);
+    }
   </script>
   <title>Listagem quartos</title>
 </head>
@@ -290,10 +309,10 @@
   <div class="div-generic">
     <form>
       <legend>Selecione a Data Inicial</legend>
-      <input id="dateStart" type="date">
+      <input id="dateStart" type="date" onchange="">
       <legend>Selecione a Data Final</legend>
-      <input id="dateEnd" type="date">
-      <button id="sendInfo" class="outline-confirm-button">Verificar Disponibilidade</button>
+      <input id="dateEnd" type="date" onchange="">
+      <button id="sendInfo" class="outline-confirm-button" onclick="reloadLists()">Verificar Disponibilidade</button>
     </form>
   </div>
 
@@ -312,8 +331,10 @@
       </thead>
       <tbody id="roomList">
         <h1>Lista de Quartos</h1>
-        <script>
-          roomList(handleRoomList);
+        <p>Clique em "Verificar Disponibilidade" para exibir os quartos referentes ao periodo.</p>
+        <script id="roomListingScript">
+          // roomList(handleRoomList);
+          roomListNonReserved(handleNonReservedRoomList);
         </script>
       </tbody>
     </table>
@@ -332,7 +353,7 @@
       <tbody id="reserveList">
         <h1>Reservas do Usuário</h1>
         <p>Para mudar o periodo da reserva, no inicio da pagina coloque a data nova e clique no botão "Alterar Data de Reserva" ao lado da reserva que deseja alterar</p>
-        <script>
+        <script id="reservationListingScript">
           reservationList(handleReservationList);
         </script>
       </tbody>

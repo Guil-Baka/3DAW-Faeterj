@@ -7,8 +7,8 @@ include 'dbCon.php';
 
 // dates for debugging
 // yyyy-mm-dd
-$start_date = '2024-12-03';
-$end_date = '2024-12-06';
+// $start_date = '2024-12-03';
+// $end_date = '2024-12-06';
 
 if (empty($start_date) || empty($end_date)) {
   header('HTTP/1.1 418 I\'m a teapot');
