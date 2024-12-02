@@ -31,16 +31,40 @@
         <nav class="nav-container">
     </div>
     <script>
-    function createRoom(){
+        function createRoom(roomNumber,numberOfBeds,roomName,descri,price){
+            
+        }
         
-    }
+    function alterRoom(roomNumber,numberOfBeds,roomName,descri,price){
+            
+        }
+        function deleteRoom(roomNumber){
+            
+        }
 
     </script>
 
     <div class="div-generic">
-        <button id='criar' onclick='createRoom'>Criar quarto</button>
-        <button id='alterar' onclick='alterRoom'>Alterar quarto</button>
-        <button id='deletar' onclick='deleteRoom'>Deletar quarto</button>
+        <form action="/adm.php" method="post">
+        <legend>Numero do quarto</legend>
+        <input id="roomNumber" type="number"><br><br>
+        
+        <legend>Numero de camas</legend>
+        <input id="numberOfBeds" type="number"><br><br>
+        
+        <legend>Nome do quarto</legend>
+        <input id="roomName" type="text"><br><br>
+    
+        <legend>Descricao do quarto</legend>
+        <input id="descri" type="text"><br><br>
+        
+        <legend>preco do quarto</legend>
+        <input id="price" type="text"><br><br>
+        
+        <button id='criar' onclick='createRoom()'>Criar quarto</button>
+        <button id='alterar' onclick='alterRoom()'>Alterar quarto</button>
+        <button id='deletar' onclick='deleteRoom()'>Deletar quarto</button>
+        </form>
     </div>
 </body>
 

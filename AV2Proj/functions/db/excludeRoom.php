@@ -3,7 +3,6 @@ include 'dbCon.php';
 
 // get room data
 @$room_number = $_POST['roomNumber'];
-@$roomName = $_POST['roomName'];
 
 // generate random values for debugging
 // $room_number = 101;
@@ -14,7 +13,7 @@ include 'dbCon.php';
 
 
 // check if any of the fields are empty
-if (empty($roomName) || empty($room_number)) {
+if ( empty($room_number)) {
     header('HTTP/1.1 418 I\'m a teapot');
     echo "All fields are required";
 } else {
@@ -30,8 +29,11 @@ if (empty($roomName) || empty($room_number)) {
   // convert room number to integer
     $room_number = intval($room_number);
 
+    $query = "SELECT id FROM rooms WHERE number = $room_number";
+    $stmt = $db->query($query);
+    $room_id = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['id'];
 
-    $query = "DELETE FROM rooms (name,price,number,number_of_beds,description) VALUES ('$roomName','$price','$room_number','$number_of_beds','$descri')";
+    $query = "DELETE FROM rooms WHERE id = $room_id ";
     $stmt = $db->query($query);
 
     header('HTTP/1.1 200 OK');
